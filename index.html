@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0714">
+  <meta name="description" content="Discover beautiful fonts, preview typography, generate stylish text and explore free fonts with SamoFont.">
+  <title>SamoFont — Fonts That Define You</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="#home">Samo<span>Font</span></a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#generator">Text Generator</a>
+      <a href="#library">Font Library</a>
+    </nav>
+    <a href="#library" class="nav-button">Explore Fonts ↗</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="badge"><span class="dot"></span> YOUR CREATIVE FONT STUDIO</div>
+      <h1>Every Font Has<br>A <span>Personality.</span></h1>
+      <p class="hero-text">Find your style. Create something beautiful.<br>Discover typography that speaks for you.</p>
+
+      <form class="search-box" id="searchForm">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search" placeholder="Search fonts, styles, categories..." aria-label="Search fonts">
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="quick-tags">
+        <span>Popular:</span>
+        <button data-category="All">All Fonts</button>
+        <button data-category="Serif">Serif</button>
+        <button data-category="Sans Serif">Sans Serif</button>
+        <button data-category="Display">Display</button>
+        <button data-category="Handwriting">Handwriting</button>
+      </div>
+
+      <div class="hero-preview">
+        <div class="preview-label">YOUR NEXT CREATIVE IDEA</div>
+        <div class="preview-big">Aa</div>
+        <div class="preview-bottom">
+          <span>Beautiful typography starts here.</span>
+          <span class="preview-symbol">Aa / 01</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="generator section" id="generator">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">CREATE YOUR STYLE</div>
+          <h2>Stylish Text Generator</h2>
+          <p>Type anything and discover different text styles.</p>
+        </div>
+      </div>
+
+      <div class="generator-panel">
+        <label for="generatorInput">YOUR TEXT</label>
+        <input id="generatorInput" type="text" maxlength="150" placeholder="Type your name here..." value="SamoFont">
+        <div class="generator-toolbar">
+          <span id="characterCount">8 / 150 characters</span>
+          <button class="small-button" id="clearText" type="button">Clear text</button>
+        </div>
+        <div id="styleResults" class="style-results"></div>
+      </div>
+    </section>
+
+    <section class="library section" id="library">
+      <div class="section-heading library-heading">
+        <div>
+          <div class="eyebrow">EXPLORE TYPOGRAPHY</div>
+          <h2>Discover Your Font</h2>
+          <p>Find a style for every project and every idea.</p>
+        </div>
+        <span id="fontCount" class="font-count"></span>
+      </div>
+
+      <div class="filters" id="categoryFilters">
+        <button class="filter active" data-category="All">All Fonts</button>
+        <button class="filter" data-category="Serif">Serif</button>
+        <button class="filter" data-category="Sans Serif">Sans Serif</button>
+        <button class="filter" data-category="Display">Display</button>
+        <button class="filter" data-category="Handwriting">Handwriting</button>
+        <button class="filter" data-category="Monospace">Monospace</button>
+      </div>
+
+      <div id="fontGrid" class="font-grid"></div>
+      <div id="emptyState" class="empty-state" hidden>No fonts found. Try another search.</div>
+      <div class="load-note">More fonts coming soon.</div>
+    </section>
+
+    <section class="cta">
+      <div class="eyebrow">MAKE IT YOURS</div>
+      <h2>Good design starts<br>with the <span>right font.</span></h2>
+      <p>Explore styles, experiment with ideas and make every word count.</p>
+      <a href="#generator" class="primary-button">Create Stylish Text ↗</a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#home">Samo<span>Font</span></a>
+    <p>Typography for your creativity.</p>
+    <span>© <span id="year"></span> SamoFont</span>
+  </footer>
+</body>
+</html>

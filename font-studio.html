@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#09090f">
 <title>Font Studio | SamoFont</title>
 
 <style>
-:root {
+:root{
   --bg:#09090f;
-  --panel:#12121d;
+  --panel:#141321;
   --border:#302843;
   --purple:#a779ff;
   --text:#f5f3ff;
@@ -21,72 +21,81 @@ body{
   font-family:Arial,sans-serif
 }
 header{
-  padding:17px 5%;border-bottom:1px solid var(--border);
+  padding:16px 5%;border-bottom:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:center;gap:12px
 }
 .logo{color:var(--purple);font-size:23px;font-weight:900;text-decoration:none}
-.back{color:white;text-decoration:none;font-size:14px}
-main{max-width:1100px;margin:auto;padding:25px 16px 50px}
+a{color:var(--purple)}
+main{max-width:1100px;margin:auto;padding:24px 15px 50px}
 h1{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
 h2{font-size:21px}
 .subtitle,.note{color:var(--muted);line-height:1.6}
 .panel{
   background:var(--panel);border:1px solid var(--border);
-  border-radius:16px;padding:18px;margin-bottom:18px;min-width:0
+  border-radius:15px;padding:18px;margin-bottom:18px;min-width:0
 }
-label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
 input,select,button{font:inherit}
 input,select{
-  width:100%;min-width:0;background:#0b0b13;color:white;
-  border:1px solid var(--border);border-radius:9px;padding:12px
+  width:100%;min-width:0;padding:12px;border-radius:9px;
+  border:1px solid var(--border);background:#0b0b13;color:white
 }
 button{
-  cursor:pointer;background:#201b31;color:white;border:1px solid var(--border);
-  padding:11px 13px;border-radius:9px
+  padding:11px 13px;border-radius:9px;border:1px solid var(--border);
+  background:#211b32;color:white;cursor:pointer
 }
 button:disabled{opacity:.5;cursor:not-allowed}
-.primary{background:var(--purple);color:#140c22;font-weight:bold;border-color:var(--purple)}
+.primary{background:var(--purple);color:#170d24;font-weight:bold}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
 .field{flex:1;min-width:130px}
 .workspace{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 #drawCanvas{
-  display:block;width:100%;height:300px;background:white;
+  width:100%;height:280px;display:block;background:white;
   border-radius:10px;touch-action:none
 }
 .letters{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin:12px 0}
 .letter{padding:9px 0;min-width:0;overflow:hidden}
-.letter.active{background:var(--purple);color:#140c22;font-weight:bold}
-.note{font-size:12px;margin:10px 0}
+.letter.active{background:var(--purple);color:#170d24}
+.note{font-size:12px}
+.status{font-size:13px;line-height:1.6;color:#c8aaff;overflow-wrap:anywhere}
 .preview{
-  background:white;color:#17121e;border-radius:10px;padding:18px;
-  min-height:100px;overflow-wrap:anywhere;font-size:30px;line-height:1.6
+  background:white;color:#17121e;border-radius:10px;
+  padding:18px;min-height:130px;overflow-wrap:anywhere;
+  white-space:pre-wrap;font-size:30px;line-height:1.6
 }
-.preview small{display:block;font-size:12px;color:#666;margin-bottom:8px}
-.status{color:#c8aaff;font-size:13px;line-height:1.5;margin-top:12px}
-.saved-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
-.saved-item{
-  background:#fff;color:#17121e;border-radius:8px;padding:10px 2px;
-  text-align:center;font-size:23px;overflow:hidden
+.preview-label{color:var(--muted);font-size:12px;margin-bottom:8px}
+.card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.font-card{border:1px solid var(--border);padding:13px;border-radius:12px;min-width:0}
+.font-card strong{overflow-wrap:anywhere}
+.font-sample{
+  background:white;color:#17121e;border-radius:8px;padding:10px;
+  margin:10px 0;font-size:25px;overflow-wrap:anywhere
 }
+.font-actions{display:flex;gap:7px;flex-wrap:wrap}
+.font-actions button{flex:1}
 hr{border:0;border-top:1px solid var(--border);margin:20px 0}
+footer{text-align:center;color:var(--muted);padding:20px}
 @media(max-width:700px){
   .workspace{grid-template-columns:1fr}
   .letters{grid-template-columns:repeat(6,minmax(0,1fr))}
-  #drawCanvas{height:270px}
+  .card-grid{grid-template-columns:1fr}
   header{padding:15px 4%}
 }
 </style>
 </head>
 
 <body>
+
 <header>
   <a class="logo" href="./index.html">SamoFont</a>
-  <a class="back" href="./index.html">← Back to Home</a>
+  <a href="./index.html">Home</a>
 </header>
 
 <main>
   <h1>Font Studio</h1>
-  <p class="subtitle">Draw your letters, smooth your strokes and export your own TrueType font.</p>
+  <p class="subtitle">
+    Create your own font, preview your design and save your TTF fonts.
+  </p>
 
   <section class="panel">
     <div class="row">
@@ -94,13 +103,15 @@ hr{border:0;border-top:1px solid var(--border);margin:20px 0}
         <label for="fontName">Font name</label>
         <input id="fontName" maxlength="40" value="My SamoFont">
       </div>
+
       <div class="field">
-        <label for="fontMode">Drawing style</label>
+        <label for="fontMode">Drawing mode</label>
         <select id="fontMode">
           <option value="hand">Handwritten</option>
           <option value="clean">Clean / Smooth</option>
         </select>
       </div>
+
       <div class="field">
         <label for="strokeWidth">Stroke thickness</label>
         <select id="strokeWidth">
@@ -114,120 +125,169 @@ hr{border:0;border-top:1px solid var(--border);margin:20px 0}
   </section>
 
   <div class="workspace">
-    <section class="panel">
-      <h2>1. Draw your character</h2>
-      <p class="note">Choose a character, draw it on the canvas, then save it.</p>
-      <div id="letters" class="letters"></div>
 
+    <section class="panel">
+      <h2>1. Draw Your Font</h2>
+      <p class="note">Select a character, draw it and save it.</p>
+
+      <div id="letters" class="letters"></div>
       <h3 id="selectedTitle">Character: A</h3>
+
       <canvas id="drawCanvas" width="400" height="300"></canvas>
 
-      <p class="note">Tip: Keep the letter inside the canvas. Clean mode smooths the vector path.</p>
+      <p class="note">
+        Draw inside the canvas. Use Clean mode to smooth your strokes.
+      </p>
+
       <div class="row">
         <button id="clearBtn">Clear</button>
         <button id="undoBtn">Undo Stroke</button>
         <button id="saveLetterBtn" class="primary">Save Character</button>
       </div>
-      <div id="drawStatus" class="status" aria-live="polite"></div>
+
+      <p id="drawStatus" class="status" aria-live="polite"></p>
     </section>
 
     <section class="panel">
-      <h2>2. Preview your font</h2>
-      <label for="previewText">Preview text</label>
-      <input id="previewText" value="SamoFont Studio 123">
-      <div style="height:12px"></div>
+      <h2>2. Live Font Preview</h2>
 
-      <div id="preview" class="preview">
-        <small>System preview — saved custom glyphs are shown below</small>
-        SamoFont Studio 123
+      <label for="previewText">Type your preview text</label>
+      <input id="previewText" value="SamoFont Studio 123">
+
+      <p class="preview-label">Generated font preview</p>
+      <div id="livePreview" class="preview">
+        Generate your font to preview it here.
       </div>
 
-      <div id="customPreview" class="saved-grid" style="margin-top:12px"></div>
+      <p class="note">
+        Generate the font after saving your characters. Preview uses the
+        actual generated TTF, not just the canvas drawing.
+      </p>
 
-      <p class="note">The preview shows your saved custom glyphs. Exported font files use vector outlines generated from your strokes.</p>
+      <button id="generateBtn" class="primary" style="width:100%">
+        Generate TTF & Preview
+      </button>
+
+      <div style="height:10px"></div>
+
+      <button id="downloadBtn" style="width:100%" disabled>
+        Download TTF
+      </button>
+
+      <div style="height:10px"></div>
+
+      <button id="saveFontBtn" style="width:100%" disabled>
+        Save to My Font Library
+      </button>
+
+      <p id="fontStatus" class="status" aria-live="polite"></p>
 
       <hr>
-      <h2>3. Save and export</h2>
+
+      <h2>Project Backup</h2>
       <div class="row">
-        <button id="saveProjectBtn" class="primary">Save Project</button>
+        <button id="saveProjectBtn">Save Project</button>
         <button id="loadProjectBtn">Load Project</button>
-        <button id="exportJsonBtn">Export Project JSON</button>
-        <button id="importJsonBtn">Import Project JSON</button>
+        <button id="exportJsonBtn">Export JSON</button>
+        <button id="importJsonBtn">Import JSON</button>
         <input id="importFile" type="file" accept=".json,application/json" hidden>
       </div>
-
-      <div style="height:12px"></div>
-      <button id="exportTtfBtn" class="primary" style="width:100%">Generate & Download TTF</button>
-      <p class="note">Draw and save the characters you need before exporting. A basic font requires saved glyphs.</p>
-      <div id="projectStatus" class="status" aria-live="polite"></div>
+      <p id="projectStatus" class="status" aria-live="polite"></p>
     </section>
   </div>
 
   <section class="panel">
-    <h2>Saved characters</h2>
-    <div id="savedCharacters" class="saved-grid"></div>
-    <p class="note">Tap a saved character to edit it.</p>
+    <h2>3. Saved Characters</h2>
+    <div id="savedCharacters" class="letters"></div>
+    <p class="note">Select a saved character to edit it.</p>
+  </section>
+
+  <section class="panel">
+    <h2>4. My Font Library</h2>
+    <p class="subtitle">
+      Your saved fonts are stored in this browser on this device.
+    </p>
+
+    <div id="fontLibrary" class="card-grid"></div>
+    <p id="libraryStatus" class="status" aria-live="polite"></p>
   </section>
 </main>
 
-<!-- Browser-based TrueType font generation library -->
+<footer>SamoFont — Create your own style.</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
 
 <script>
 (function(){
 "use strict";
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?'-+";
-const STORAGE_KEY = "samofont_studio_project_v2";
+const alphabet =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?'-+";
 
-const canvas = document.getElementById("drawCanvas");
+const PROJECT_KEY = "samofont_studio_project_v2";
+const LIBRARY_KEY = "samofont_ttf_library_v1";
+
+const $ = id => document.getElementById(id);
+
+const canvas = $("drawCanvas");
 const ctx = canvas.getContext("2d");
-const fontName = document.getElementById("fontName");
-const fontMode = document.getElementById("fontMode");
-const strokeWidth = document.getElementById("strokeWidth");
-const previewText = document.getElementById("previewText");
-const preview = document.getElementById("preview");
-const customPreview = document.getElementById("customPreview");
-const lettersBox = document.getElementById("letters");
-const savedCharacters = document.getElementById("savedCharacters");
-const drawStatus = document.getElementById("drawStatus");
-const projectStatus = document.getElementById("projectStatus");
-const importFile = document.getElementById("importFile");
 
 let selected = "A";
-let drawing = false;
 let strokes = [];
-let currentStroke = null;
 let saved = {};
+let drawing = false;
+let currentStroke = null;
 
-function status(el, text){ el.textContent = text; }
+let currentFontBlob = null;
+let currentFontName = "";
+let currentFontFamily = "";
+let currentFontFace = null;
+let currentObjectURL = null;
 
-function clone(value){ return JSON.parse(JSON.stringify(value)); }
+function setStatus(id,message){
+  $(id).textContent = message;
+}
+
+function clone(value){
+  return JSON.parse(JSON.stringify(value));
+}
+
+function safeFilename(name){
+  return (name || "My-SamoFont")
+    .replace(/[^a-z0-9_-]/gi,"-")
+    .slice(0,50) || "My-SamoFont";
+}
 
 function drawGrid(){
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#fff";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle = "#eeeeee";
+
+  ctx.strokeStyle = "#e9e9e9";
   ctx.lineWidth = 1;
   ctx.setLineDash([5,5]);
+
   ctx.beginPath();
   ctx.moveTo(20,230);
   ctx.lineTo(380,230);
   ctx.moveTo(200,20);
   ctx.lineTo(200,280);
   ctx.stroke();
+
   ctx.setLineDash([]);
 }
 
 function smoothPoints(points){
   if(points.length < 3) return points;
+
   const result = [points[0]];
+
   for(let i=1;i<points.length-1;i++){
     result.push({
-      x:(points[i-1].x + points[i].x + points[i+1].x)/3,
-      y:(points[i-1].y + points[i].y + points[i+1].y)/3
+      x:(points[i-1].x+points[i].x+points[i+1].x)/3,
+      y:(points[i-1].y+points[i].y+points[i+1].y)/3
     });
   }
+
   result.push(points[points.length-1]);
   return result;
 }
@@ -237,10 +297,14 @@ function renderStrokes(){
 
   for(const original of strokes){
     if(!original.length) continue;
-    const points = fontMode.value === "clean" ? smoothPoints(original) : original;
+
+    const points = $("fontMode").value === "clean"
+      ? smoothPoints(original)
+      : original;
+
     ctx.beginPath();
     ctx.strokeStyle = "#17121e";
-    ctx.lineWidth = Number(strokeWidth.value);
+    ctx.lineWidth = Number($("strokeWidth").value);
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.moveTo(points[0].x,points[0].y);
@@ -248,32 +312,79 @@ function renderStrokes(){
     for(let i=1;i<points.length;i++){
       ctx.lineTo(points[i].x,points[i].y);
     }
-    if(points.length===1) ctx.lineTo(points[0].x+0.1,points[0].y+0.1);
+
+    if(points.length===1){
+      ctx.lineTo(points[0].x+0.1,points[0].y+0.1);
+    }
+
     ctx.stroke();
   }
 }
 
 function renderLetterButtons(){
-  lettersBox.innerHTML = "";
+  $("letters").innerHTML = "";
+
   for(const ch of alphabet){
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.className = "letter" + (ch===selected ? " active" : "");
     btn.textContent = ch;
-    btn.type = "button";
+
     btn.addEventListener("click",()=>{
       selected = ch;
       strokes = saved[ch] ? clone(saved[ch]) : [];
-      document.getElementById("selectedTitle").textContent = "Character: " + ch;
+
+      $("selectedTitle").textContent = "Character: " + ch;
+
       renderLetterButtons();
       renderStrokes();
-      status(drawStatus, saved[ch] ? "Saved character loaded for editing." : "Draw this character and save it.");
+
+      setStatus(
+        "drawStatus",
+        saved[ch] ? "Saved character loaded. Edit and save it again."
+                   : "Draw this character, then save it."
+      );
     });
-    lettersBox.appendChild(btn);
+
+    $("letters").appendChild(btn);
+  }
+}
+
+function renderSavedCharacters(){
+  const box = $("savedCharacters");
+  box.innerHTML = "";
+
+  const chars = Object.keys(saved);
+
+  if(!chars.length){
+    box.textContent = "No characters saved yet.";
+    return;
+  }
+
+  for(const ch of chars){
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "letter";
+    btn.textContent = ch;
+
+    btn.addEventListener("click",()=>{
+      selected = ch;
+      strokes = clone(saved[ch]);
+
+      $("selectedTitle").textContent = "Character: " + ch;
+
+      renderLetterButtons();
+      renderStrokes();
+      setStatus("drawStatus","Editing character "+ch+".");
+    });
+
+    box.appendChild(btn);
   }
 }
 
 function pointFromEvent(event){
   const rect = canvas.getBoundingClientRect();
+
   return {
     x:(event.clientX-rect.left)*canvas.width/rect.width,
     y:(event.clientY-rect.top)*canvas.height/rect.height
@@ -282,262 +393,195 @@ function pointFromEvent(event){
 
 canvas.addEventListener("pointerdown",event=>{
   event.preventDefault();
+
   drawing = true;
   currentStroke = [pointFromEvent(event)];
   strokes.push(currentStroke);
-  if(canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+
+  if(canvas.setPointerCapture){
+    canvas.setPointerCapture(event.pointerId);
+  }
+
   renderStrokes();
 });
 
 canvas.addEventListener("pointermove",event=>{
   if(!drawing || !currentStroke) return;
+
   event.preventDefault();
   currentStroke.push(pointFromEvent(event));
   renderStrokes();
 });
 
-function stopDrawing(){ drawing=false; currentStroke=null; }
+function stopDrawing(){
+  drawing = false;
+  currentStroke = null;
+}
+
 canvas.addEventListener("pointerup",stopDrawing);
 canvas.addEventListener("pointercancel",stopDrawing);
 canvas.addEventListener("lostpointercapture",stopDrawing);
 
-document.getElementById("clearBtn").addEventListener("click",()=>{
-  strokes=[];
+$("clearBtn").addEventListener("click",()=>{
+  strokes = [];
   renderStrokes();
-  status(drawStatus,"Canvas cleared. Save the character when ready.");
+  setStatus("drawStatus","Canvas cleared.");
 });
 
-document.getElementById("undoBtn").addEventListener("click",()=>{
+$("undoBtn").addEventListener("click",()=>{
   strokes.pop();
   renderStrokes();
-  status(drawStatus,"Last stroke removed.");
+  setStatus("drawStatus","Last stroke removed.");
 });
 
-document.getElementById("saveLetterBtn").addEventListener("click",()=>{
+$("saveLetterBtn").addEventListener("click",()=>{
   if(!strokes.length){
-    status(drawStatus,"Draw a character before saving.");
+    setStatus("drawStatus","Draw a character before saving.");
     return;
   }
-  saved[selected]=clone(strokes);
-  renderSaved();
-  renderPreview();
-  status(drawStatus,"Character "+selected+" saved.");
+
+  saved[selected] = clone(strokes);
+
+  renderSavedCharacters();
+  renderLibraryPreviewText();
+
+  setStatus("drawStatus","Character "+selected+" saved.");
+
+  // The previous generated font is now out of date.
+  setStatus("fontStatus","Character changed. Generate the font again to update its preview.");
+  $("downloadBtn").disabled = true;
+  $("saveFontBtn").disabled = true;
 });
 
-fontMode.addEventListener("change",renderStrokes);
-strokeWidth.addEventListener("change",renderStrokes);
-previewText.addEventListener("input",renderPreview);
-
-function renderPreview(){
-  preview.replaceChildren();
-  const small=document.createElement("small");
-  small.textContent="System preview — custom characters below";
-  preview.appendChild(small);
-  preview.appendChild(document.createTextNode(previewText.value || "Your preview"));
-
-  customPreview.innerHTML="";
-  const text=previewText.value || "";
-  const unique=[...new Set(text.split(""))].filter(ch=>saved[ch]);
-
-  for(const ch of unique){
-    const cell=document.createElement("div");
-    cell.className="saved-item";
-    cell.title="Saved custom drawing for "+ch;
-    cell.textContent=ch;
-    customPreview.appendChild(cell);
-  }
-}
-
-function renderSaved(){
-  savedCharacters.innerHTML="";
-  const keys=Object.keys(saved);
-
-  if(!keys.length){
-    savedCharacters.textContent="No saved characters yet.";
-    return;
-  }
-
-  for(const ch of keys){
-    const btn=document.createElement("button");
-    btn.className="saved-item";
-    btn.type="button";
-    btn.textContent=ch;
-    btn.title="Edit "+ch;
-    btn.addEventListener("click",()=>{
-      selected=ch;
-      strokes=clone(saved[ch]);
-      document.getElementById("selectedTitle").textContent="Character: "+ch;
-      renderLetterButtons();
-      renderStrokes();
-      status(drawStatus,"Editing saved character "+ch+".");
-    });
-    savedCharacters.appendChild(btn);
-  }
-}
+$("fontMode").addEventListener("change",renderStrokes);
+$("strokeWidth").addEventListener("change",renderStrokes);
 
 function getProject(){
   return {
     app:"SamoFont Studio",
     version:2,
-    fontName:fontName.value.trim() || "My SamoFont",
+    fontName:$("fontName").value.trim() || "My SamoFont",
     characters:saved
   };
 }
 
-document.getElementById("saveProjectBtn").addEventListener("click",()=>{
+$("saveProjectBtn").addEventListener("click",()=>{
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(getProject()));
-    status(projectStatus,"Project saved in this browser.");
+    localStorage.setItem(PROJECT_KEY,JSON.stringify(getProject()));
+    setStatus("projectStatus","Project saved in this browser.");
   }catch(e){
-    status(projectStatus,"Could not save. Export the project JSON instead.");
+    setStatus("projectStatus","Could not save project. Export the JSON backup instead.");
   }
 });
 
 function applyProject(data){
-  if(!data || data.app!=="SamoFont Studio" || !data.characters ||
-     typeof data.characters!=="object" || Array.isArray(data.characters)){
-    throw new Error("Invalid project");
+  if(!data || data.app!=="SamoFont Studio" ||
+     !data.characters || typeof data.characters!=="object" ||
+     Array.isArray(data.characters)){
+    throw new Error("Invalid project file.");
   }
 
   for(const [ch,paths] of Object.entries(data.characters)){
-    if(typeof ch!=="string" || ch.length!==1 || !Array.isArray(paths)) {
-      throw new Error("Invalid character");
+    if(ch.length!==1 || !Array.isArray(paths)){
+      throw new Error("Invalid character data.");
     }
+
     for(const path of paths){
-      if(!Array.isArray(path) || path.length>10000) throw new Error("Invalid stroke");
-      for(const p of path){
-        if(!p || !Number.isFinite(p.x) || !Number.isFinite(p.y)) {
-          throw new Error("Invalid point");
+      if(!Array.isArray(path)) throw new Error("Invalid stroke data.");
+
+      for(const point of path){
+        if(!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)){
+          throw new Error("Invalid drawing point.");
         }
       }
     }
   }
 
-  fontName.value=data.fontName || "My SamoFont";
-  saved=clone(data.characters);
-  strokes=saved[selected] ? clone(saved[selected]) : [];
+  $("fontName").value = data.fontName || "My SamoFont";
+  saved = clone(data.characters);
+  strokes = saved[selected] ? clone(saved[selected]) : [];
+
   renderLetterButtons();
   renderStrokes();
-  renderSaved();
-  renderPreview();
+  renderSavedCharacters();
+
+  currentFontBlob = null;
+  $("downloadBtn").disabled = true;
+  $("saveFontBtn").disabled = true;
+  setStatus("fontStatus","Project loaded. Generate the font again.");
 }
 
-document.getElementById("loadProjectBtn").addEventListener("click",()=>{
+$("loadProjectBtn").addEventListener("click",()=>{
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(PROJECT_KEY);
+
     if(!raw){
-      status(projectStatus,"No project saved on this device.");
+      setStatus("projectStatus","No saved project found.");
       return;
     }
+
     applyProject(JSON.parse(raw));
-    status(projectStatus,"Project loaded.");
+    setStatus("projectStatus","Project loaded.");
   }catch(e){
-    status(projectStatus,"Could not load the saved project.");
+    setStatus("projectStatus",e.message || "Could not load project.");
   }
 });
 
-function downloadFile(name,blob){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=name;
+function downloadBlob(filename,blob){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = filename;
+
   document.body.appendChild(a);
   a.click();
   a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),2000);
+
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
 }
 
-function safeFilename(name){
-  return (name || "My-SamoFont").replace(/[^a-z0-9_-]/gi,"-").slice(0,50) || "My-SamoFont";
-}
-
-document.getElementById("exportJsonBtn").addEventListener("click",()=>{
-  downloadFile(
-    safeFilename(fontName.value)+"-project.json",
-    new Blob([JSON.stringify(getProject(),null,2)],{type:"application/json"})
+$("exportJsonBtn").addEventListener("click",()=>{
+  const blob = new Blob(
+    [JSON.stringify(getProject(),null,2)],
+    {type:"application/json"}
   );
-  status(projectStatus,"Project JSON exported. This file is editable project data, not a font.");
+
+  downloadBlob(
+    safeFilename($("fontName").value)+"-project.json",
+    blob
+  );
+
+  setStatus("projectStatus","Project JSON exported.");
 });
 
-document.getElementById("importJsonBtn").addEventListener("click",()=>importFile.click());
+$("importJsonBtn").addEventListener("click",()=>{
+  $("importFile").click();
+});
 
-importFile.addEventListener("change",async()=>{
-  const file=importFile.files && importFile.files[0];
+$("importFile").addEventListener("change",async()=>{
+  const file = $("importFile").files[0];
   if(!file) return;
 
   try{
-    if(file.size>5*1024*1024) throw new Error("Too large");
+    if(file.size > 5*1024*1024){
+      throw new Error("File is too large.");
+    }
+
     applyProject(JSON.parse(await file.text()));
-    status(projectStatus,"Project imported successfully.");
+    setStatus("projectStatus","Project imported successfully.");
   }catch(e){
-    status(projectStatus,"Invalid or unsupported project JSON.");
+    setStatus("projectStatus",e.message || "Invalid JSON file.");
   }
-  importFile.value="";
+
+  $("importFile").value = "";
 });
 
-/*
-  TTF generation:
-  Each saved stroke becomes a vector outline in the glyph coordinate system.
-  This makes a simple single-line/stroke font rather than a filled calligraphic
-  font. The export is a real OpenType TrueType font, but glyph shapes and
-  spacing may need refinement for professional typography.
-*/
-function buildGlyphPath(character,strokePaths){
-  const path = new opentype.Path();
-  const scale=2.0;
-  const offsetX=60;
-  const baseline=170;
-
-  for(const original of strokePaths){
-    if(!original.length) continue;
-
-    const points=fontMode.value==="clean" ? smoothPoints(original) : original;
-
-    if(points.length===1){
-      const p=points[0];
-      const x=offsetX+p.x*scale;
-      const y=baseline+(150-p.y)*scale;
-      const r=Math.max(1,Number(strokeWidth.value)*scale/2);
-      path.moveTo(x+r,y);
-      path.curveTo(x+r,y+r*0.55,x-r,y+r*0.55,x-r,y);
-      path.curveTo(x-r,y-r*0.55,x+r,y-r*0.55,x+r,y);
-      path.close();
-      continue;
-    }
-
-    // Convert each line segment into a filled quadrilateral.
-    const radius=Math.max(1,Number(strokeWidth.value)*scale/2);
-
-    for(let i=1;i<points.length;i++){
-      const a=points[i-1], b=points[i];
-      const ax=offsetX+a.x*scale;
-      const ay=baseline+(150-a.y)*scale;
-      const bx=offsetX+b.x*scale;
-      const by=baseline+(150-b.y)*scale;
-
-      const dx=bx-ax, dy=by-ay;
-      const length=Math.hypot(dx,dy);
-      if(length<0.01) continue;
-
-      const nx=(-dy/length)*radius;
-      const ny=(dx/length)*radius;
-
-      path.moveTo(ax+nx,ay+ny);
-      path.lineTo(bx+nx,by+ny);
-      path.lineTo(bx-nx,by-ny);
-      path.lineTo(ax-nx,ay-ny);
-      path.close();
-
-      // Round joins/caps are approximated with small circles.
-      addCircle(path,ax,ay,radius);
-      addCircle(path,bx,by,radius);
-    }
-  }
-  return path;
-}
+/* Vector outline creation for the TrueType glyphs. */
 
 function addCircle(path,x,y,r){
-  const k=0.5522847498*r;
+  const k = 0.5522847498*r;
+
   path.moveTo(x+r,y);
   path.curveTo(x+r,y+k,x+k,y+r,x,y+r);
   path.curveTo(x-k,y+r,x-r,y+k,x-r,y);
@@ -546,82 +590,330 @@ function addCircle(path,x,y,r){
   path.close();
 }
 
-document.getElementById("exportTtfBtn").addEventListener("click",()=>{
-  const button=document.getElementById("exportTtfBtn");
-  button.disabled=true;
+function buildGlyphPath(strokePaths){
+  const path = new opentype.Path();
+  const scale = 2;
+  const offsetX = 0;
+  const baseline = 0;
+  const radius = Math.max(1,Number($("strokeWidth").value)*scale/2);
 
-  try{
-    if(!window.opentype){
-      throw new Error("Font engine could not load. Check your internet connection and reload the page.");
-    }
+  for(const original of strokePaths){
+    if(!original.length) continue;
 
-    const keys=Object.keys(saved);
-    if(!keys.length){
-      throw new Error("Draw and save at least one character first.");
-    }
+    const points = $("fontMode").value === "clean"
+      ? smoothPoints(original)
+      : original;
 
-    const glyphs=[];
-    const notdef=new opentype.Glyph({
-      name:".notdef",
-      unicode:0,
-      advanceWidth:600,
-      path:new opentype.Path()
-    });
-    glyphs.push(notdef);
-
-    // Space glyph
-    glyphs.push(new opentype.Glyph({
-      name:"space",
-      unicode:32,
-      advanceWidth:350,
-      path:new opentype.Path()
+    const converted = points.map(p=>({
+      x:offsetX+p.x*scale,
+      y:baseline+(150-p.y)*scale
     }));
 
-    for(const ch of keys){
-      const unicode=ch.codePointAt(0);
-      if(unicode<33 || unicode>126) continue;
-
-      const path=buildGlyphPath(ch,saved[ch]);
-      const glyph=new opentype.Glyph({
-        name:"uni"+unicode.toString(16).toUpperCase().padStart(4,"0"),
-        unicode:unicode,
-        advanceWidth:600,
-        path:path
-      });
-      glyphs.push(glyph);
+    if(converted.length===1){
+      addCircle(path,converted[0].x,converted[0].y,radius);
+      continue;
     }
 
-    if(glyphs.length<=2){
-      throw new Error("No supported characters found. Save basic Latin letters or numbers.");
+    for(let i=1;i<converted.length;i++){
+      const a=converted[i-1];
+      const b=converted[i];
+
+      const dx=b.x-a.x;
+      const dy=b.y-a.y;
+      const length=Math.hypot(dx,dy);
+
+      if(length<0.01) continue;
+
+      const nx=(-dy/length)*radius;
+      const ny=(dx/length)*radius;
+
+      path.moveTo(a.x+nx,a.y+ny);
+      path.lineTo(b.x+nx,b.y+ny);
+      path.lineTo(b.x-nx,b.y-ny);
+      path.lineTo(a.x-nx,a.y-ny);
+      path.close();
+
+      addCircle(path,a.x,a.y,radius);
+      addCircle(path,b.x,b.y,radius);
+    }
+  }
+
+  return path;
+}
+
+function buildFont(){
+  if(!window.opentype){
+    throw new Error("Font engine did not load. Check your internet and reload.");
+  }
+
+  const chars = Object.keys(saved).filter(ch=>{
+    const code=ch.codePointAt(0);
+    return code>=33 && code<=126 && saved[ch].length>0;
+  });
+
+  if(!chars.length){
+    throw new Error("Draw and save at least one character first.");
+  }
+
+  const glyphs = [];
+
+  glyphs.push(new opentype.Glyph({
+    name:".notdef",
+    unicode:0,
+    advanceWidth:600,
+    path:new opentype.Path()
+  }));
+
+  glyphs.push(new opentype.Glyph({
+    name:"space",
+    unicode:32,
+    advanceWidth:350,
+    path:new opentype.Path()
+  }));
+
+  for(const ch of chars){
+    const code=ch.codePointAt(0);
+
+    glyphs.push(new opentype.Glyph({
+      name:"uni"+code.toString(16).toUpperCase().padStart(4,"0"),
+      unicode:code,
+      advanceWidth:600,
+      path:buildGlyphPath(saved[ch])
+    }));
+  }
+
+  const family = ($("fontName").value.trim() || "My SamoFont").slice(0,40);
+
+  return new opentype.Font({
+    familyName:family,
+    styleName:"Regular",
+    unitsPerEm:1000,
+    ascender:850,
+    descender:-150,
+    glyphs:glyphs
+  });
+}
+
+async function createPreviewFont(blob){
+  const family = "SamoFontPreview" + Date.now();
+  const url = URL.createObjectURL(blob);
+
+  try{
+    const face = new FontFace(family,"url("+url+")");
+    await face.load();
+    document.fonts.add(face);
+
+    if(currentObjectURL){
+      URL.revokeObjectURL(currentObjectURL);
     }
 
-    const family=(fontName.value.trim() || "My SamoFont").slice(0,40);
-    const font=new opentype.Font({
-      familyName:family,
-      styleName:"Regular",
-      unitsPerEm:1000,
-      ascender:850,
-      descender:-150,
-      glyphs:glyphs
-    });
+    currentObjectURL = url;
+    currentFontFace = face;
+    currentFontFamily = family;
 
-    const arrayBuffer=font.toArrayBuffer();
-    const blob=new Blob([arrayBuffer],{type:"font/ttf"});
-    downloadFile(safeFilename(family)+".ttf",blob);
-
-    status(projectStatus,"TTF generated. It contains your saved vector characters; missing characters will not have custom drawings.");
+    $("livePreview").style.fontFamily = '"' + family + '", sans-serif';
+    $("livePreview").textContent = $("previewText").value || " ";
   }catch(e){
-    status(projectStatus,e.message || "Could not generate TTF.");
+    URL.revokeObjectURL(url);
+    throw new Error("TTF generated, but browser preview could not load it.");
+  }
+}
+
+$("previewText").addEventListener("input",()=>{
+  $("livePreview").textContent = $("previewText").value || " ";
+});
+
+$("generateBtn").addEventListener("click",async()=>{
+  const button = $("generateBtn");
+  button.disabled = true;
+
+  try{
+    const font = buildFont();
+    const arrayBuffer = font.toArrayBuffer();
+
+    currentFontBlob = new Blob(
+      [arrayBuffer],
+      {type:"font/ttf"}
+    );
+
+    currentFontName = $("fontName").value.trim() || "My SamoFont";
+
+    await createPreviewFont(currentFontBlob);
+
+    $("downloadBtn").disabled = false;
+    $("saveFontBtn").disabled = false;
+
+    setStatus(
+      "fontStatus",
+      "Font generated and preview loaded. Characters without saved drawings will not have custom glyphs."
+    );
+  }catch(e){
+    currentFontBlob = null;
+    $("downloadBtn").disabled = true;
+    $("saveFontBtn").disabled = true;
+    setStatus("fontStatus",e.message || "Font generation failed.");
   }finally{
-    button.disabled=false;
+    button.disabled = false;
   }
 });
 
+$("downloadBtn").addEventListener("click",()=>{
+  if(!currentFontBlob) return;
+
+  downloadBlob(
+    safeFilename(currentFontName)+".ttf",
+    currentFontBlob
+  );
+});
+
+/* Local browser font library */
+
+function bytesToBase64(buffer){
+  const bytes = new Uint8Array(buffer);
+  let binary = "";
+  const chunkSize = 0x8000;
+
+  for(let i=0;i<bytes.length;i+=chunkSize){
+    binary += String.fromCharCode(
+      ...bytes.subarray(i,Math.min(i+chunkSize,bytes.length))
+    );
+  }
+
+  return btoa(binary);
+}
+
+function base64ToBytes(base64){
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+
+  for(let i=0;i<binary.length;i++){
+    bytes[i]=binary.charCodeAt(i);
+  }
+
+  return bytes;
+}
+
+function getFontLibrary(){
+  try{
+    const data = JSON.parse(localStorage.getItem(LIBRARY_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  }catch(e){
+    return [];
+  }
+}
+
+function renderFontLibrary(){
+  const box = $("fontLibrary");
+  box.innerHTML = "";
+
+  const library = getFontLibrary();
+
+  if(!library.length){
+    box.textContent = "No fonts saved yet. Generate a TTF and save it here.";
+    return;
+  }
+
+  for(const font of library){
+    const card = document.createElement("div");
+    card.className = "font-card";
+
+    const title = document.createElement("strong");
+    title.textContent = font.name;
+
+    const sample = document.createElement("div");
+    sample.className = "font-sample";
+    sample.textContent = "Aa Bb 123";
+
+    const actions = document.createElement("div");
+    actions.className = "font-actions";
+
+    const download = document.createElement("button");
+    download.textContent = "Download";
+    download.addEventListener("click",()=>{
+      try{
+        const bytes = base64ToBytes(font.data);
+        const blob = new Blob([bytes],{type:"font/ttf"});
+
+        downloadBlob(safeFilename(font.name)+".ttf",blob);
+        setStatus("libraryStatus","Font downloaded: "+font.name);
+      }catch(e){
+        setStatus("libraryStatus","Could not download this saved font.");
+      }
+    });
+
+    const remove = document.createElement("button");
+    remove.textContent = "Delete";
+    remove.addEventListener("click",()=>{
+      const updated = getFontLibrary().filter(item=>item.id!==font.id);
+
+      try{
+        localStorage.setItem(LIBRARY_KEY,JSON.stringify(updated));
+        renderFontLibrary();
+        setStatus("libraryStatus","Font removed from this browser.");
+      }catch(e){
+        setStatus("libraryStatus","Could not update the library.");
+      }
+    });
+
+    actions.append(download,remove);
+    card.append(title,sample,actions);
+    box.appendChild(card);
+  }
+}
+
+$("saveFontBtn").addEventListener("click",()=>{
+  if(!currentFontBlob){
+    setStatus("libraryStatus","Generate the font first.");
+    return;
+  }
+
+  try{
+    const library = getFontLibrary();
+    const bufferPromise = currentFontBlob.arrayBuffer();
+
+    bufferPromise.then(buffer=>{
+      const newFont = {
+        id:String(Date.now())+"-"+Math.random().toString(36).slice(2,8),
+        name:currentFontName,
+        data:bytesToBase64(buffer),
+        savedAt:new Date().toISOString()
+      };
+
+      const updated = [newFont,...getFontLibrary()];
+
+      try{
+        localStorage.setItem(LIBRARY_KEY,JSON.stringify(updated));
+        renderFontLibrary();
+        setStatus("libraryStatus","Saved to My Font Library: "+currentFontName);
+      }catch(e){
+        setStatus(
+          "libraryStatus",
+          "Browser storage is full. Download your TTF and keep a backup."
+        );
+      }
+    }).catch(()=>{
+      setStatus("libraryStatus","Could not prepare the font file.");
+    });
+  }catch(e){
+    setStatus("libraryStatus","Could not save the font.");
+  }
+});
+
+function renderLibraryPreviewText(){
+  // Preserve the current preview text while a character is edited.
+  if(!currentFontBlob){
+    $("livePreview").textContent =
+      "Save your characters, then generate the font to preview it.";
+  }
+}
+
 renderLetterButtons();
 renderStrokes();
-renderSaved();
-renderPreview();
+renderSavedCharacters();
+renderFontLibrary();
+
 })();
 </script>
+
 </body>
 </html>
